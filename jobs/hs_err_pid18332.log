@@ -1,0 +1,239 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 132120576 bytes. Error detail: G1 virtual space
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   This process is running with CompressedOops enabled, and the Java Heap may be blocking the growth of the native heap
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+#   JVM is running with Unscaled Compressed Oops mode in which the Java heap is
+#     placed in the first 4GB address space. The Java Heap base address is the
+#     maximum limit for the native heap growth. Please use -XX:HeapBaseMinAddress
+#     to set the Java Heap base and to place the Java Heap above 4GB virtual address.
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (os_windows.cpp:3686), pid=18332, tid=28160
+#
+# JRE version:  (21.0.7+6) (build )
+# Java VM: OpenJDK 64-Bit Server VM (21.0.7+6-LTS, mixed mode, sharing, tiered, compressed oops, compressed class ptrs, g1 gc, windows-amd64)
+# No core dump will be written. Minidumps are not enabled by default on client versions of Windows
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -Xmx128m org.apache.spark.launcher.Main org.apache.spark.deploy.SparkSubmit --conf spark.app.name=bronze_clickstream_ingestion --conf spark.master=local[*] --conf spark.sql.shuffle.partitions=4 pyspark-shell
+
+Host: Intel(R) Core(TM) i7-10750H CPU @ 2.60GHz, 12 cores, 7G,  Windows 11 , 64 bit Build 26100 (10.0.26100.7623)
+Time: Mon Jan 26 19:27:59 2026 Eastern Standard Time elapsed time: 2.023875 seconds (0d 0h 0m 2s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x0000015adf3edb50):  JavaThread "Unknown thread" [_thread_in_vm, id=28160, stack(0x000000529b300000,0x000000529b400000) (1024K)]
+
+Stack: [0x000000529b300000,0x000000529b400000]
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x6ce119]
+V  [jvm.dll+0x8a84a1]
+V  [jvm.dll+0x8aa9ce]
+V  [jvm.dll+0x8ab0b3]
+V  [jvm.dll+0x27f8a6]
+V  [jvm.dll+0x6ca945]
+V  [jvm.dll+0x6bebea]
+V  [jvm.dll+0x355eca]
+V  [jvm.dll+0x35da96]
+V  [jvm.dll+0x3af72e]
+V  [jvm.dll+0x3af9d8]
+V  [jvm.dll+0x32a05c]
+V  [jvm.dll+0x32abbb]
+V  [jvm.dll+0x871719]
+V  [jvm.dll+0x3bc501]
+V  [jvm.dll+0x85a743]
+V  [jvm.dll+0x45080e]
+V  [jvm.dll+0x452451]
+C  [jli.dll+0x5278]
+C  [ucrtbase.dll+0x37b0]
+C  [KERNEL32.DLL+0x2e8d7]
+C  [ntdll.dll+0x8c53c]
+
+
+---------------  P R O C E S S  ---------------
+
+Threads class SMR info:
+_java_thread_list=0x00007ffe7551a0c8, length=0, elements={
+}
+
+Java Threads: ( => current thread )
+Total: 0
+
+Other Threads:
+  0x0000015ae1826830 WorkerThread "GC Thread#0"                     [id=27280, stack(0x000000529b400000,0x000000529b500000) (1024K)]
+  0x0000015ae1828810 ConcurrentGCThread "G1 Main Marker"            [id=27948, stack(0x000000529b500000,0x000000529b600000) (1024K)]
+  0x0000015ae182a1a0 WorkerThread "G1 Conc#0"                       [id=22672, stack(0x000000529b600000,0x000000529b700000) (1024K)]
+
+[error occurred during error reporting (printing all threads), id 0xc0000005, EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007ffe74c1c987]
+VM state: not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x00007ffe7558e408] Heap_lock - owner thread: 0x0000015adf3edb50
+
+Heap address: 0x00000000f8000000, size: 128 MB, Compressed Oops mode: 32-bit
+
+CDS archive(s) mapped at: [0x0000000000000000-0x0000000000000000-0x0000000000000000), size 0, SharedBaseAddress: 0x0000000800000000, ArchiveRelocationMode: 1.
+Narrow klass base: 0x0000000000000000, Narrow klass shift: 0, Narrow klass range: 0x0
+
+GC Precious Log:
+ CardTable entry size: 512
+ Card Set container configuration: InlinePtr #cards 5 size 8 Array Of Cards #cards 12 size 40 Howl #buckets 4 coarsen threshold 1843 Howl Bitmap #cards 512 size 80 coarsen threshold 460 Card regions per heap region 1 cards per card region 2048
+
+Heap:
+ garbage-first heap   total 0K, used 0K [0x00000000f8000000, 0x0000000100000000)
+  region size 1024K, 0 young (0K), 0 survivors (0K)
+
+[error occurred during error reporting (printing heap information), id 0xc0000005, EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x00007ffe75007949]
+GC Heap History (0 events):
+No events
+
+Dll operation events (1 events):
+Event: 0.008 Loaded shared library C:\Program Files\Eclipse Adoptium\jdk-21.0.7.6-hotspot\bin\java.dll
+
+Deoptimization events (0 events):
+No events
+
+Classes loaded (0 events):
+No events
+
+Classes unloaded (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+ZGC Phase Switch (0 events):
+No events
+
+VM Operations (0 events):
+No events
+
+Memory protections (0 events):
+No events
+
+Nmethod flushes (0 events):
+No events
+
+Events (0 events):
+No events
+
+
+Dynamic libraries:
+0x00007ff7cfd90000 - 0x00007ff7cfd9e000 	C:\Program Files\Eclipse Adoptium\jdk-21.0.7.6-hotspot\bin\java.exe
+0x00007fff5a1c0000 - 0x00007fff5a427000 	C:\WINDOWS\SYSTEM32\ntdll.dll
+0x00007fff58970000 - 0x00007fff58a39000 	C:\WINDOWS\System32\KERNEL32.DLL
+0x00007fff57a30000 - 0x00007fff57e1f000 	C:\WINDOWS\System32\KERNELBASE.dll
+0x00007fff57560000 - 0x00007fff576ab000 	C:\WINDOWS\System32\ucrtbase.dll
+0x00007fff257c0000 - 0x00007fff257d8000 	C:\Program Files\Eclipse Adoptium\jdk-21.0.7.6-hotspot\bin\jli.dll
+0x00007fff3d590000 - 0x00007fff3d5ae000 	C:\Program Files\Eclipse Adoptium\jdk-21.0.7.6-hotspot\bin\VCRUNTIME140.dll
+0x00007fff58c30000 - 0x00007fff58df5000 	C:\WINDOWS\System32\USER32.dll
+0x00007fff3ac00000 - 0x00007fff3ae93000 	C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.26100.7309_none_3e05feeae336a044\COMCTL32.dll
+0x00007fff57530000 - 0x00007fff57557000 	C:\WINDOWS\System32\win32u.dll
+0x00007fff59f60000 - 0x00007fff5a009000 	C:\WINDOWS\System32\msvcrt.dll
+0x00007fff59f30000 - 0x00007fff59f5b000 	C:\WINDOWS\System32\GDI32.dll
+0x00007fff57e30000 - 0x00007fff57f5c000 	C:\WINDOWS\System32\gdi32full.dll
+0x00007fff57480000 - 0x00007fff57523000 	C:\WINDOWS\System32\msvcp_win.dll
+0x00007fff58100000 - 0x00007fff58131000 	C:\WINDOWS\System32\IMM32.DLL
+0x00007fff3d580000 - 0x00007fff3d58c000 	C:\Program Files\Eclipse Adoptium\jdk-21.0.7.6-hotspot\bin\vcruntime140_1.dll
+0x00007fff256b0000 - 0x00007fff2573d000 	C:\Program Files\Eclipse Adoptium\jdk-21.0.7.6-hotspot\bin\msvcp140.dll
+0x00007ffe748e0000 - 0x00007ffe75670000 	C:\Program Files\Eclipse Adoptium\jdk-21.0.7.6-hotspot\bin\server\jvm.dll
+0x00007fff58200000 - 0x00007fff582b4000 	C:\WINDOWS\System32\ADVAPI32.dll
+0x00007fff588c0000 - 0x00007fff58966000 	C:\WINDOWS\System32\sechost.dll
+0x00007fff59cd0000 - 0x00007fff59de8000 	C:\WINDOWS\System32\RPCRT4.dll
+0x00007fff58060000 - 0x00007fff580d4000 	C:\WINDOWS\System32\WS2_32.dll
+0x00007fff55e80000 - 0x00007fff55ede000 	C:\WINDOWS\SYSTEM32\POWRPROF.dll
+0x00007fff4e610000 - 0x00007fff4e61b000 	C:\WINDOWS\SYSTEM32\VERSION.dll
+0x00007fff49f70000 - 0x00007fff49fa5000 	C:\WINDOWS\SYSTEM32\WINMM.dll
+0x00007fff55e60000 - 0x00007fff55e74000 	C:\WINDOWS\SYSTEM32\UMPDC.dll
+0x00007fff561e0000 - 0x00007fff561fb000 	C:\WINDOWS\SYSTEM32\kernel.appcore.dll
+0x00007fff3d540000 - 0x00007fff3d54a000 	C:\Program Files\Eclipse Adoptium\jdk-21.0.7.6-hotspot\bin\jimage.dll
+0x00007fff54760000 - 0x00007fff549a2000 	C:\WINDOWS\SYSTEM32\DBGHELP.DLL
+0x00007fff58500000 - 0x00007fff58886000 	C:\WINDOWS\System32\combase.dll
+0x00007fff58a40000 - 0x00007fff58b16000 	C:\WINDOWS\System32\OLEAUT32.dll
+0x00007fff49f30000 - 0x00007fff49f6c000 	C:\WINDOWS\SYSTEM32\dbgcore.DLL
+0x00007fff57980000 - 0x00007fff57a25000 	C:\WINDOWS\System32\bcryptPrimitives.dll
+0x00007fff257a0000 - 0x00007fff257bf000 	C:\Program Files\Eclipse Adoptium\jdk-21.0.7.6-hotspot\bin\java.dll
+
+dbghelp: loaded successfully - version: 4.0.5 - missing functions: none
+symbol engine: initialized successfully - sym options: 0x614 - pdb path: .;C:\Program Files\Eclipse Adoptium\jdk-21.0.7.6-hotspot\bin;C:\WINDOWS\SYSTEM32;C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.26100.7309_none_3e05feeae336a044;C:\Program Files\Eclipse Adoptium\jdk-21.0.7.6-hotspot\bin\server
+
+VM Arguments:
+jvm_args: -Xmx128m 
+java_command: org.apache.spark.launcher.Main org.apache.spark.deploy.SparkSubmit --conf spark.app.name=bronze_clickstream_ingestion --conf spark.master=local[*] --conf spark.sql.shuffle.partitions=4 pyspark-shell
+java_class_path (initial): C:\spark-3.5.5-bin-hadoop3\jars\activation-1.1.1.jar;C:\spark-3.5.5-bin-hadoop3\jars\aircompressor-0.27.jar;C:\spark-3.5.5-bin-hadoop3\jars\algebra_2.12-2.0.1.jar;C:\spark-3.5.5-bin-hadoop3\jars\annotations-17.0.0.jar;C:\spark-3.5.5-bin-hadoop3\jars\antlr-runtime-3.5.2.jar;C:\spark-3.5.5-bin-hadoop3\jars\antlr4-runtime-4.9.3.jar;C:\spark-3.5.5-bin-hadoop3\jars\aopalliance-repackaged-2.6.1.jar;C:\spark-3.5.5-bin-hadoop3\jars\arpack-3.0.3.jar;C:\spark-3.5.5-bin-hadoop3\jars\arpack_combined_all-0.1.jar;C:\spark-3.5.5-bin-hadoop3\jars\arrow-format-12.0.1.jar;C:\spark-3.5.5-bin-hadoop3\jars\arrow-memory-core-12.0.1.jar;C:\spark-3.5.5-bin-hadoop3\jars\arrow-memory-netty-12.0.1.jar;C:\spark-3.5.5-bin-hadoop3\jars\arrow-vector-12.0.1.jar;C:\spark-3.5.5-bin-hadoop3\jars\audience-annotations-0.5.0.jar;C:\spark-3.5.5-bin-hadoop3\jars\avro-1.11.4.jar;C:\spark-3.5.5-bin-hadoop3\jars\avro-ipc-1.11.4.jar;C:\spark-3.5.5-bin-hadoop3\jars\avro-mapred-1.11.4.jar;C:\spark-3.5.5-bin-hadoop3\jars\blas-3.0.3.jar;C:\spark-3.5.5-bin-hadoop3\jars\bonecp-0.8.0.RELEASE.jar;C:\spark-3.5.5-bin-hadoop3\jars\breeze-macros_2.12-2.1.0.jar;C:\spark-3.5.5-bin-hadoop3\jars\breeze_2.12-2.1.0.jar;C:\spark-3.5.5-bin-hadoop3\jars\cats-kernel_2.12-2.1.1.jar;C:\spark-3.5.5-bin-hadoop3\jars\chill-java-0.10.0.jar;C:\spark-3.5.5-bin-hadoop3\jars\chill_2.12-0.10.0.jar;C:\spark-3.5.5-bin-hadoop3\jars\commons-cli-1.5.0.jar;C:\spark-3.5.5-bin-hadoop3\jars\commons-codec-1.16.1.jar;C:\spark-3.5.5-bin-hadoop3\jars\commons-collections-3.2.2.jar;C:\spark-3.5.5-bin-hadoop3\jars\commons-collections4-4.4.jar;C:\spark-3.5.5-bin-hadoop3\jars\commons-compiler-3.1.9.jar;C:\spark-3.5.5-bin-hadoop3\jars\commons-compress-1.23.0.jar;C:\spark-3.5.5-bin-hadoop3\jars\commons-crypto-1.1.0.jar;C:\spark-3.5.5-bin-hadoop3\jars\commons-dbcp-1.4.jar;C:\spark-3.5.5-bin-hadoop3\jars\commons-io-2.16.1.jar;C:\spark-3.5.5-bin-hadoop3\jars\commons-lang-2.6.jar;C:\spark-3.5.5-bin-hadoop3\jars\commons-lang3-3.12.0.jar;C:\spark-3.5.5-bin-hadoop3\jars\commons-logging-1.1.3.jar;C:\spark-3.5.5-bin-hadoop3\jars\commons-math3-3.6.1.jar;C:\spark-3.5.5-bin-hadoop3\jars\commons-pool-1.5.4.jar;C:\spark-3.5.5-bin-hadoop3\jars\commons-text-1.10.0.jar;C:\spark-3.5.5-bin-hadoop3\jars\compress-lzf-1.1.2.jar;C:\spark-3.5.5-bin-hadoop3\jars\curator-client-2.13.0.jar;C:\spark-3.5.5-bin-hadoop3\jars\curator-framework-2.13.0.jar;C:\spark-3.5.5-bin-hadoop3\jars\curator-recipes-2.13.0.jar;C:\spark-3.5.5-bin-hadoop3\jars\datanucleus-api-jdo-4.2.4.jar;C:\spark-3.5.5-bin-hadoop3\jars\datanucleus-core-4.1.17.jar;C:\spark-3.5.5-bin-hadoop3\jars\datanucleus-rdbms-4.1.19.jar;C:\spark-3.5.5-bin-hadoop3\jars\datasketches-java-3.3.0.jar;C:\spark-3.5.5-bin-hadoop3\jars\datasketches-memory-2.1.0.jar;C:\spark-3.5.5-bin-hadoop3\jars\derby-10.14.2.0.jar;C:\spark-3.5.5-bin-hadoop3\jars\dropwizard-metrics-hadoop-metrics2-reporter-0.1.2.jar;C:\spark-3.5.5-bin-hadoop3\jars\flatbuffers-java-1.12.0.jar;C:\spark-3.5.5-bin-hadoop3\jars\gson-2.2.4.jar;C:\spark-3.5.5-bin-hadoop3\jars\guava-14.0.1.jar;C:\spark-3.5.5-bin-hadoop3\jars\hadoop-client-api-3.3.4.jar;C:\spark-3.5.5-bin-hadoop3\jars\hadoop-client-runtime-3.3.4.jar;C:\spark-3.5.5-bin-hadoop3\jars\hadoop-shaded-guava-1.1.1.jar;C:\spark-3.5.5-bin-hadoop3\jars\hadoop-yarn-server-web-proxy-3.3.4.jar;C:\spark-3.5.5-bin-hadoop3\jars\HikariCP-2.5.1.jar;C:\spark-3.5.5-bin-hadoop3\jars\hive-beeline-2.3.9.jar;C:\spark-3.5.5-bin-hadoop3\jars\hive-cli-2.3.9.jar;C:\spark-3.5.5-bin-hadoop3\jars\hive-common-2.3.9.jar;C:\spark-3.5.5-bin-hadoop3\jars\hive-exec-2.3.9-core.jar;C:\spark-3.5.5-bin-hadoop3\jars\hive-jdbc-2.3.9.jar;C:\spark-3.5.5-bin-hadoop3\jars\hive-llap-common-2.3.9.jar;C:\spark-3.5.5-bin-hadoop3\jars\hive-metastore-2.3.9.jar;C:\spark-3.5.5-bin-hadoop3\jars\hive-serde-2.3.9.jar;C:\spark-3.5.5-bin-hadoop3\jars\hive-service-rpc-3.1.3.jar;C:\spark-3.5.5-bin-hadoop3\jars\hive-shims-0.23-2.3.9.jar;C:\spark-3.5.5-bin-hadoop3\jars\hive-shims-2.3.9.jar;C:\spark-3.5.5-bin-hadoop3\jars\hive-shims-common-2.3.9.jar;C:\spark-3.5.5-bin-hadoop3\jars\hive-shims-scheduler-2.3.9.jar;C:\spark-3.5.5-bin-hadoop3\jars\hive-storage-api-2.8.1.jar;C:\spark-3.5.5-bin-hadoop3\jars\hk2-api-2.6.1.jar;C:\spark-3.5.5-bin-hadoop3\jars\hk2-locator-2.6.1.jar;C:\spark-3.5.5-bin-hadoop3\jars\hk2-utils-2.6.1.jar;C:\spark-3.5.5-bin-hadoop3\jars\httpclient-4.5.14.jar;C:\spark-3.5.5-bin-hadoop3\jars\httpcore-4.4.16.jar;C:\spark-3.5.5-bin-hadoop3\jars\istack-commons-runtime-3.0.8.jar;C:\spark-3.5.5-bin-hadoop3\jars\ivy-2.5.1.jar;C:\spark-3.5.5-bin-hadoop3\jars\jackson-annotations-2.15.2.jar;C:\spark-3.5.5-bin-hadoop3\jars\jackson-core-2.15.2.jar;C:\spark-3.5.5-bin-hadoop3\jars\jackson-core-asl-1.9.13.jar;C:\spark-3.5.5-bin-hadoop3\jars\jackson-databind-2.15.2.jar;C:\spark-3.5.5-bin-hadoop3\jars\jackson-dataformat-yaml-2.15.2.jar;C:\spark-3.5.5-bin-hadoop3\jars\jackson-datatype-jsr310-2.15.2.jar;C:\spark-3.5.5-bin-hadoop3\jars\jackson-mapper-asl-1.9.13.jar;C:\spark-3.5.5-bin-hadoop3\jars\jackson-module-scala_2.12-2.15.2.jar;C:\spark-3.5.5-bin-hadoop3\jars\jakarta.annotation-api-1.3.5.jar;C:\spark-3.5.5-bin-hadoop3\jars\jakarta.inject-2.6.1.jar;C:\spark-3.5.5-bin-hadoop3\jars\jakarta.servlet-api-4.0.3.jar;C:\spark-3.5.5-bin-hadoop3\jars\jakarta.validation-api-2.0.2.jar;C:\spark-3.5.5-bin-hadoop3\jars\jakarta.ws.rs-api-2.1.6.jar;C:\spark-3.5.5-bin-hadoop3\jars\jakarta.xml.bind-api-2.3.2.jar;C:\spark-3.5.5-bin-hadoop3\jars\janino-3.1.9.jar;C:\spark-3.5.5-bin-hadoop3\jars\javassist-3.29.2-GA.jar;C:\spark-3.5.5-bin-hadoop3\jars\javax.jdo-3.2.0-m3.jar;C:\spark-3.5.5-bin-hadoop3\jars\javolution-5.5.1.jar;C:\spark-3.5.5-bin-hadoop3\jars\jaxb-runtime-2.3.2.jar;C:\spark-3.5.5-bin-hadoop3\jars\jcl-over-slf4j-2.0.7.jar;C:\spark-3.5.5-bin-hadoop3\jars\jdo-api-3.0.1.jar;C:\spark-3.5.5-bin-hadoop3\jars\jersey-client-2.40.jar;C:\spark-3.5.5-bin-hadoop3\jars\jersey-common-2.40.jar;C:\spark-3.5.5-bin-hadoop3\jars\jersey-container-servlet-2.40.jar;C:\spark-3.5.5-bin-hadoop3\jars\jersey-container-servlet-core-2.40.jar;C:\spark-3.5.5-bin-hadoop3\jars\jersey-hk2-2.40.jar;C:\spark-3.5.5-bin-hadoop3\jars\jersey-server-2.40.jar;C:\spark-3.5.5-bin-hadoop3\jars\JLargeArrays-1.5.jar;C:\spark-3.5.5-bin-hadoop3\jars\jline-2.14.6.jar;C:\spark-3.5.5-bin-hadoop3\jars\joda-time-2.12.5.jar;C:\spark-3.5.5-bin-hadoop3\jars\jodd-core-3.5.2.jar;C:\spark-3.5.5-bin-hadoop3\jars\jpam-1.1.jar;C:\spark-3.5.5-bin-hadoop3\jars\json-1.8.jar;C:\spark-3.5.5-bin-hadoop3\jars\json4s-ast_2.12-3.7.0-M11.jar;C:\spark-3.5.5-bin-hadoop3\jars\json4s-core_2.12-3.7.0-M11.jar;C:\spark-3.5.5-bin-hadoop3\jars\json4s-jackson_2.12-3.7.0-M11.jar;C:\spark-3.5.5-bin-hadoop3\jars\json4s-scalap_2.12-3.7.0-M11.jar;C:\spark-3.5.5-bin-hadoop3\jars\jsr305-3.0.0.jar;C:\spark-3.5.5-bin-hadoop3\jars\jta-1.1.jar;C:\spark-3.5.5-bin-hadoop3\jars\JTransforms-3.1.jar;C:\spark-3.5.5-bin-hadoop3\jars\jul-to-slf4j-2.0.7.jar;C:\spark-3.5.5-bin-hadoop3\jars\kryo-shaded-4.0.2.jar;C:\spark-3.5.5-bin-hadoop3\jars\kubernetes-client-6.7.2.jar;C:\spark-3.5.5-bin-hadoop3\jars\kubernetes-client-api-6.7.2.jar;C:\spark-3.5.5-bin-hadoop3\jars\kubernetes-httpclient-okhttp-6.7.2.jar;C:\spark-3.5.5-bin-hadoop3\jars\kubernetes-model-admissionregistration-6.7.2.jar;C:\spark-3.5.5-bin-hadoop3\jars\kubernetes-model-apiextensions-6.7.2.jar;C:\spark-3.5.5-bin-hadoop3\jars\kubernetes-model-apps-6.7.2.jar;C:\spark-3.5.5-bin-hadoop3\jars\kubernetes-model-autoscaling-6.7.2.jar;C:\spark-3.5.5-bin-hadoop3\jars\kubernetes-model-batch-6.7.2.jar;C:\spark-3.5.5-bin-hadoop3\jars\kubernetes-model-certificates-6.7.2.jar;C:\spark-3.5.5-bin-hadoop3\jars\kubernetes-model-common-6.7.2.jar;C:\spark-3.5.5-bin-hadoop3\jars\kubernetes-model-coordination-6.7.2.jar;C:\spark-3.5.5-bin-hadoop3\jars\kubernetes-model-core-6.7.2.jar;C:\spark-3.5.5-bin-hadoop3\jars\kubernetes-model-discovery-6.7.2.jar;C:\spark-3.5.5-bin-hadoop3\jars\kubernetes-model-events-6.7.2.jar;C:\spark-3.5.5-bin-hadoop3\jars\kubernetes-model-extensions-6.7.2.jar;C:\spark-3.5.5-bin-hadoop3\jars\kubernetes-model-flowcontrol-6.7.2.jar;C:\spark-3.5.5-bin-hadoop3\jars\kubernetes-model-gatewayapi-6.7.2.jar;C:\spark-3.5.5-bin-hadoop3\jars\kubernetes-model-metrics-6.7.2.jar;C:\spark-3.5.5-bin-hadoop3\jars\kubernetes-model-networking-6.7.2.jar;C:\spark-3.5.5-bin-hadoop3\jars\kubernetes-model-node-6.7.2.jar;C:\spark-3.5.5-bin-hadoop3\jars\kubernetes-model-policy-6.7.2.jar;C:\spark-3.5.5-bin-hadoop3\jars\kubernetes-model-rbac-6.7.2.jar;C:\spark-3.5.5-bin-hadoop3\jars\kubernetes-model-resource-6.7.2.jar;C:\spark-3.5.5-bin-hadoop3\jars\kubernetes-model-scheduling-6.7.2.jar;C:\spark-3.5.5-bin-hadoop3\jars\kubernetes-model-storageclass-6.7.2.jar;C:\spark-3.5.5-bin-hadoop3\jars\lapack-3.0.3.jar;C:\spark-3.5.5-bin-hadoop3\jars\leveldbjni-all-1.8.jar;C:\spark-3.5.5-bin-hadoop3\jars\libfb303-0.9.3.jar;C:\spark-3.5.5-bin-hadoop3\jars\libthrift-0.12.0.jar;C:\spark-3.5.5-bin-hadoop3\jars\log4j-1.2-api-2.20.0.jar;C:\spark-3.5.5-bin-hadoop3\jars\log4j-api-2.20.0.jar;C:\spark-3.5.5-bin-hadoop3\jars\log4j-core-2.20.0.jar;C:\spark-3.5.5-bin-hadoop3\jars\log4j-slf4j2-impl-2.20.0.jar;C:\spark-3.5.5-bin-hadoop3\jars\logging-interceptor-3.12.12.jar;C:\spark-3.5.5-bin-hadoop3\jars\lz4-java-1.8.0.jar;C:\spark-3.5.5-bin-hadoop3\jars\mesos-1.4.3-shaded-protobuf.jar;C:\spark-3.5.5-bin-hadoop3\jars\metrics-core-4.2.19.jar;C:\spark-3.5.5-bin-hadoop3\jars\metrics-graphite-4.2.19.jar;C:\spark-3.5.5-bin-hadoop3\jars\metrics-jmx-4.2.19.jar;C:\spark-3.5.5-bin-hadoop3\jars\metrics-json-4.2.19.jar;C:\spark-3.5.5-bin-hadoop3\jars\metrics-jvm-4.2.19.jar;C:\spark-3.5.5-bin-hadoop3\jars\minlog-1.3.0.jar;C:\spark-3.5.5-bin-hadoop3\jars\netty-all-4.1.96.Final.jar;C:\spark-3.5.5-bin-hadoop3\jars\netty-buffer-4.1.96.Final.jar;C:\spark-3.5.5-bin-hadoop3\jars\netty-codec-4.1.96.Final.jar;C:\spark-3.5.5-bin-hadoop3\jars\netty-codec-http-4.1.96.Final.jar;C:\spark-3.5.5-bin-hadoop3\jars\netty-codec-http2-4.1.96.Final.jar;C:\spark-3.5.5-bin-hadoop3\jars\netty-codec-socks-4.1.96.Final.jar;C:\spark-3.5.5-bin-hadoop3\jars\netty-common-4.1.96.Final.jar;C:\spark-3.5.5-bin-hadoop3\jars\netty-handler-4.1.96.Final.jar;C:\spark-3.5.5-bin-hadoop3\jars\netty-handler-proxy-4.1.96.Final.jar;C:\spark-3.5.5-bin-hadoop3\jars\netty-resolver-4.1.96.Final.jar;C:\spark-3.5.5-bin-hadoop3\jars\netty-transport-4.1.96.Final.jar;C:\spark-3.5.5-bin-hadoop3\jars\netty-transport-classes-epoll-4.1.96.Final.jar;C:\spark-3.5.5-bin-hadoop3\jars\netty-transport-classes-kqueue-4.1.96.Final.jar;C:\spark-3.5.5-bin-hadoop3\jars\netty-transport-native-epoll-4.1.96.Final-linux-aarch_64.jar;C:\spark-3.5.5-bin-hadoop3\jars\netty-transport-native-epoll-4.1.96.Final-linux-x86_64.jar;C:\spark-3.5.5-bin-hadoop3\jars\netty-transport-native-kqueue-4.1.96.Final-osx-aarch_64.jar;C:\spark-3.5.5-bin-hadoop3\jars\netty-transport-native-kqueue-4.1.96.Final-osx-x86_64.jar;C:\spark-3.5.5-bin-hadoop3\jars\netty-transport-native-unix-common-4.1.96.Final.jar;C:\spark-3.5.5-bin-hadoop3\jars\objenesis-3.3.jar;C:\spark-3.5.5-bin-hadoop3\jars\okhttp-3.12.12.jar;C:\spark-3.5.5-bin-hadoop3\jars\okio-1.17.6.jar;C:\spark-3.5.5-bin-hadoop3\jars\opencsv-2.3.jar;C:\spark-3.5.5-bin-hadoop3\jars\orc-core-1.9.5-shaded-protobuf.jar;C:\spark-3.5.5-bin-hadoop3\jars\orc-mapreduce-1.9.5-shaded-protobuf.jar;C:\spark-3.5.5-bin-hadoop3\jars\orc-shims-1.9.5.jar;C:\spark-3.5.5-bin-hadoop3\jars\oro-2.0.8.jar;C:\spark-3.5.5-bin-hadoop3\jars\osgi-resource-locator-1.0.3.jar;C:\spark-3.5.5-bin-hadoop3\jars\paranamer-2.8.jar;C:\spark-3.5.5-bin-hadoop3\jars\parquet-column-1.13.1.jar;C:\spark-3.5.5-bin-hadoop3\jars\parquet-common-1.13.1.jar;C:\spark-3.5.5-bin-hadoop3\jars\parquet-encoding-1.13.1.jar;C:\spark-3.5.5-bin-hadoop3\jars\parquet-format-structures-1.13.1.jar;C:\spark-3.5.5-bin-hadoop3\jars\parquet-hadoop-1.13.1.jar;C:\spark-3.5.5-bin-hadoop3\jars\parquet-jackson-1.13.1.jar;C:\spark-3.5.5-bin-hadoop3\jars\pickle-1.3.jar;C:\spark-3.5.5-bin-hadoop3\jars\py4j-0.10.9.7.jar;C:\spark-3.5.5-bin-hadoop3\jars\RoaringBitmap-0.9.45.jar;C:\spark-3.5.5-bin-hadoop3\jars\rocksdbjni-8.3.2.jar;C:\spark-3.5.5-bin-hadoop3\jars\scala-collection-compat_2.12-2.7.0.jar;C:\spark-3.5.5-bin-hadoop3\jars\scala-compiler-2.12.18.jar;C:\spark-3.5.5-bin-hadoop3\jars\scala-library-2.12.18.jar;C:\spark-3.5.5-bin-hadoop3\jars\scala-parser-combinators_2.12-2.3.0.jar;C:\spark-3.5.5-bin-hadoop3\jars\scala-reflect-2.12.18.jar;C:\spark-3.5.5-bin-hadoop3\jars\scala-xml_2.12-2.1.0.jar;C:\spark-3.5.5-bin-hadoop3\jars\shims-0.9.45.jar;C:\spark-3.5.5-bin-hadoop3\jars\slf4j-api-2.0.7.jar;C:\spark-3.5.5-bin-hadoop3\jars\snakeyaml-2.0.jar;C:\spark-3.5.5-bin-hadoop3\jars\snakeyaml-engine-2.6.jar;C:\spark-3.5.5-bin-hadoop3\jars\snappy-java-1.1.10.5.jar;C:\spark-3.5.5-bin-hadoop3\jars\spark-catalyst_2.12-3.5.5.jar;C:\spark-3.5.5-bin-hadoop3\jars\spark-common-utils_2.12-3.5.5.jar;C:\spark-3.5.5-bin-hadoop3\jars\spark-core_2.12-3.5.5.jar;C:\spark-3.5.5-bin-hadoop3\jars\spark-graphx_2.12-3.5.5.jar;C:\spark-3.5.5-bin-hadoop3\jars\spark-hive-thriftserver_2.12-3.5.5.jar;C:\spark-3.5.5-bin-hadoop3\jars\spark-hive_2.12-3.5.5.jar;C:\spark-3.5.5-bin-hadoop3\jars\spark-kubernetes_2.12-3.5.5.jar;C:\spark-3.5.5-bin-hadoop3\jars\spark-kvstore_2.12-3.5.5.jar;C:\spark-3.5.5-bin-hadoop3\jars\spark-launcher_2.12-3.5.5.jar;C:\spark-3.5.5-bin-hadoop3\jars\spark-mesos_2.12-3.5.5.jar;C:\spark-3.5.5-bin-hadoop3\jars\spark-mllib-local_2.12-3.5.5.jar;C:\spark-3.5.5-bin-hadoop3\jars\spark-mllib_2.12-3.5.5.jar;C:\spark-3.5.5-bin-hadoop3\jars\spark-network-common_2.12-3.5.5.jar;C:\spark-3.5.5-bin-hadoop3\jars\spark-network-shuffle_2.12-3.5.5.jar;C:\spark-3.5.5-bin-hadoop3\jars\spark-repl_2.12-3.5.5.jar;C:\spark-3.5.5-bin-hadoop3\jars\spark-sketch_2.12-3.5.5.jar;C:\spark-3.5.5-bin-hadoop3\jars\spark-sql-api_2.12-3.5.5.jar;C:\spark-3.5.5-bin-hadoop3\jars\spark-sql_2.12-3.5.5.jar;C:\spark-3.5.5-bin-hadoop3\jars\spark-streaming_2.12-3.5.5.jar;C:\spark-3.5.5-bin-hadoop3\jars\spark-tags_2.12-3.5.5.jar;C:\spark-3.5.5-bin-hadoop3\jars\spark-unsafe_2.12-3.5.5.jar;C:\spark-3.5.5-bin-hadoop3\jars\spark-yarn_2.12-3.5.5.jar;C:\spark-3.5.5-bin-hadoop3\jars\spire-macros_2.12-0.17.0.jar;C:\spark-3.5.5-bin-hadoop3\jars\spire-platform_2.12-0.17.0.jar;C:\spark-3.5.5-bin-hadoop3\jars\spire-util_2.12-0.17.0.jar;C:\spark-3.5.5-bin-hadoop3\jars\spire_2.12-0.17.0.jar;C:\spark-3.5.5-bin-hadoop3\jars\ST4-4.0.4.jar;C:\spark-3.5.5-bin-hadoop3\jars\stax-api-1.0.1.jar;C:\spark-3.5.5-bin-hadoop3\jars\stream-2.9.6.jar;C:\spark-3.5.5-bin-hadoop3\jars\super-csv-2.2.0.jar;C:\spark-3.5.5-bin-hadoop3\jars\threeten-extra-1.7.1.jar;C:\spark-3.5.5-bin-hadoop3\jars\tink-1.9.0.jar;C:\spark-3.5.5-bin-hadoop3\jars\transaction-api-1.1.jar;C:\spark-3.5.5-bin-hadoop3\jars\univocity-parsers-2.9.1.jar;C:\spark-3.5.5-bin-hadoop3\jars\xbean-asm9-shaded-4.23.jar;C:\spark-3.5.5-bin-hadoop3\jars\xz-1.9.jar;C:\spark-3.5.5-bin-hadoop3\jars\zjsonpatch-0.3.0.jar;C:\spark-3.5.5-bin-hadoop3\jars\zookeeper-3.6.3.jar;C:\spark-3.5.5-bin-hadoop3\jars\zookeeper-jute-3.6.3.jar;C:\spark-3.5.5-bin-hadoop3\jars\zstd-jni-1.5.5-4.jar
+Launcher Type: SUN_STANDARD
+
+[Global flags]
+     intx CICompilerCount                          = 4                                         {product} {ergonomic}
+     uint ConcGCThreads                            = 3                                         {product} {ergonomic}
+     uint G1ConcRefinementThreads                  = 10                                        {product} {ergonomic}
+   size_t G1HeapRegionSize                         = 1048576                                   {product} {ergonomic}
+    uintx GCDrainStackTargetSize                   = 64                                        {product} {ergonomic}
+   size_t InitialHeapSize                          = 132120576                                 {product} {ergonomic}
+   size_t MarkStackSize                            = 4194304                                   {product} {ergonomic}
+   size_t MaxHeapSize                              = 134217728                                 {product} {command line}
+   size_t MinHeapDeltaBytes                        = 1048576                                   {product} {ergonomic}
+   size_t MinHeapSize                              = 8388608                                   {product} {ergonomic}
+    uintx NonNMethodCodeHeapSize                   = 5839372                                {pd product} {ergonomic}
+    uintx NonProfiledCodeHeapSize                  = 122909434                              {pd product} {ergonomic}
+    uintx ProfiledCodeHeapSize                     = 122909434                              {pd product} {ergonomic}
+    uintx ReservedCodeCacheSize                    = 251658240                              {pd product} {ergonomic}
+     bool SegmentedCodeCache                       = true                                      {product} {ergonomic}
+   size_t SoftMaxHeapSize                          = 134217728                              {manageable} {ergonomic}
+     bool UseCompressedOops                        = true                           {product lp64_product} {ergonomic}
+     bool UseG1GC                                  = true                                      {product} {ergonomic}
+     bool UseLargePagesIndividualAllocation        = false                                  {pd product} {ergonomic}
+
+Logging:
+Log output configuration:
+ #0: stdout all=warning uptime,level,tags foldmultilines=false
+ #1: stderr all=off uptime,level,tags foldmultilines=false
+
+Environment Variables:
+PATH=C:\Users\Kunal Vishwa\projects\test\.venv\Scripts;c:\Users\Kunal Vishwa\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\debugCommand;c:\Users\Kunal Vishwa\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\copilotCli;C:\Program Files\Eclipse Adoptium\jdk-21.0.7.6-hotspot\bin;C:\Program Files\Python311\Scripts\;C:\Program Files\Python311\;c:\Users\Kunal Vishwa\AppData\Local\Programs\cursor\resources\app\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Git\cmd;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\Kunal Vishwa\AppData\Local\Programs\Python\Launcher\;C:\Users\Kunal Vishwa\AppData\Local\Microsoft\WindowsApps;C:\ProgramData\chocolatey\bin;C:\Program Files\nodejs\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Docker\Docker\resources\bin;C:\spark\bin;C:\hadoop\bin;C:\Program Files\Snowflake SnowSQL\;C:\Program Files\cursor\resources\app\bin;C:\Program Files\Eclipse Adoptium\jdk-21.0.7.6-hotspot\bin;C:\Program Files\Python311\Scripts\;C:\Program Files\Python311\;c:\Users\Kunal Vishwa\AppData\Local\Programs\cursor\resources\app\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Git\cmd;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\Kunal Vishwa\AppData\Local\Programs\Python\Launcher\;C:\Users\Kunal Vishwa\AppData\Local\Microsoft\WindowsApps;C:\ProgramData\chocolatey\bin;C:\Program Files\nodejs\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Docker\Docker\resources\bin;C:\spark\bin;C:\hadoop\bin;C:\Program Files\Snowflake SnowSQL\;C:\Program Files\cursor\resources\app\bin;C:\Users\Kunal Vishwa\AppData\Roaming\Python\Python311\Scripts;C:\Users\Kunal Vishwa\AppData\Local\;C:\Users\Kunal Vishwa\AppData\Local\Programs\Ollama;C:\Users\Kunal Vishwa\AppData\Local\Programs\cursor\resources\app\bin;C:\Users\Kunal Vishwa\AppData\Local\Programs\Microsoft VS Code\bin;c:\Users\Kunal Vishwa\.vscode\extensions\ms-python.debugpy-2025.18.0-win32-x64\bundled\scripts\noConfigScripts
+USERNAME=Kunal Vishwa
+LANG=en_US.UTF-8
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 165 Stepping 2, GenuineIntel
+TMP=C:\Temp
+TEMP=C:\Temp
+
+
+
+
+Periodic native trim disabled
+
+---------------  S Y S T E M  ---------------
+
+OS:
+ Windows 11 , 64 bit Build 26100 (10.0.26100.7623)
+OS uptime: 0 days 4:48 hours
+Hyper-V role detected
+
+CPU: total 12 (initial active 12) (6 cores per cpu, 2 threads per core) family 6 model 165 stepping 2 microcode 0xfc, cx8, cmov, fxsr, ht, mmx, 3dnowpref, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, lzcnt, tsc, tscinvbit, avx, avx2, aes, erms, clmul, bmi1, bmi2, adx, fma, vzeroupper, clflush, clflushopt, hv, rdtscp, f16c
+Processor Information for the first 12 processors :
+  Max Mhz: 2592, Current Mhz: 2592, Mhz Limit: 2592
+
+Memory: 4k page, system-wide physical 7985M (469M free)
+TotalPageFile size 24369M (AvailPageFile size 31M)
+current process WorkingSet (physical memory assigned to process): 12M, peak: 12M
+current process commit charge ("private bytes"): 64M, peak: 190M
+
+vm_info: OpenJDK 64-Bit Server VM (21.0.7+6-LTS) for windows-amd64 JRE (21.0.7+6-LTS), built on 2025-04-15T00:00:00Z by "admin" with MS VC++ 17.7 (VS2022)
+
+END.
