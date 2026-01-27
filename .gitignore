@@ -6,11 +6,6 @@ __pycache__/
 *.pyc
 *.pyo
 
-# Spark / Data outputs
-data/
-*.crc
-_SUCCESS
-
 
 # Logs
 *.log
