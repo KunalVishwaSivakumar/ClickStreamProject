@@ -10,7 +10,7 @@ __pycache__/
 data/
 *.crc
 _SUCCESS
-part-*
+
 
 # Logs
 *.log

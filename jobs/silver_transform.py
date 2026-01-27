@@ -10,31 +10,31 @@ from pyspark.sql.functions import col, trim
 from utils.spark_session import get_spark
 
 def main():
-    spark = get_spark(appname="silver_clickstream_tranform")
+    spark = get_spark("silver_clickstream_tranform")
     #Define Path
     bronze_path = str(project_root / "data" / "bronze")
     silver_path = str(project_root / "data" / "silver")
 
     bronze_df = spark.read.parquet(bronze_path)
 
-    silver_df = bronze_df.dropna(subset=["user_id", "event_type"])
+    silver_df = bronze_df.dropna(subset=["UserID", "EventType"])
 
     product_events = ["product_view", "add_to_cart", "purchase"]
 
     silver_df = silver_df.filter(
-    (col("event_type").isin(product_events) & col("product_id").isNotNull()
+    (col("EventType").isin(product_events) & col("ProductId").isNotNull()
     |
-    (~col("event_type").isin(product_events)))
+    (~col("EventType").isin(product_events)))
     )
 
 
     silver_df = silver_df.filter(
-        (col("event_type") != "purchase") | col("amount").isNotNull()
+        (col("EventType") != "purchase") | col("Amount").isNotNull()
     )
 
     silver_df.write.mode("overwrite").parquet(silver_path)
 
-    spark.close()
+    spark.stop()
 
 if __name__ == "__main__":
     main()
