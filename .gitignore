@@ -1,0 +1,22 @@
+# Virtual environments
+.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Spark / Data outputs
+data/
+*.crc
+_SUCCESS
+part-*
+
+# Logs
+*.log
+hs_err_pid*
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
