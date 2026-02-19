@@ -1,0 +1,142 @@
+# config/config.yaml
+# Centralized configuration for all jobs
+# This allows easy switching between environments (dev, test, prod)
+
+# Data paths - where input/output files are located
+paths:
+  raw_data: "data/raw/ecommerce_clickstream_transactions.csv"
+  bronze: "data/bronze"
+  silver: "data/silver"
+  gold: "data/gold"
+  logs: "logs"
+
+# Spark configuration - engine settings
+spark:
+  app_name: "ecommerce_clickstream_pipeline"
+  master: "local[*]"                    # Use all available cores
+  partitions: 4                         # Number of partitions for processing
+  log_level: "WARN"                     # Spark log level (DEBUG, INFO, WARN, ERROR)
+  shuffle_partitions: 4                 # Partitions for shuffle operations
+
+# Data layer configuration
+data:
+  # How data is partitioned in Bronze and Silver
+  partition_column: "ingestion_date"
+  partition_format: "%Y-%m-%d"
+  
+  # Output format for parquet files
+  output_format: "parquet"
+  compression: "snappy"                 # snappy, gzip, lz4, uncompressed
+  mode: "overwrite"                     # overwrite, append, ignore, error
+
+# Validation rules - what makes data "good"
+validation:
+  # Columns that must exist in every layer
+  required_columns:
+    - UserID
+    - EventType
+    - SessionID
+    - Timestamp
+  
+  # Event types that are product-related
+  product_events:
+    - product_view
+    - add_to_cart
+    - purchase
+  
+  # All possible event types in the system
+  all_event_types:
+    - page_view
+    - product_view
+    - add_to_cart
+    - purchase
+    - search
+    - login
+    - logout
+    - error
+  
+  # Column requirements by event type
+  event_type_requirements:
+    product_view:
+      required_columns:
+        - ProductID
+    add_to_cart:
+      required_columns:
+        - ProductID
+    purchase:
+      required_columns:
+        - ProductID
+        - Amount
+
+# Data quality thresholds
+quality:
+  # Alert if more than this % of rows have nulls
+  max_allowed_nulls_pct: 5
+  
+  # Fail if fewer rows than this
+  min_row_count: 100
+  
+  # Expected number of columns in raw data
+  expected_columns: 7
+
+# Performance and optimization
+performance:
+  # Cache frequently used tables?
+  cache_dimensions: true
+  
+  # Broadcast small tables to workers?
+  broadcast_threshold_mb: 10
+
+# Logging configuration
+logging:
+  # Log level: DEBUG, INFO, WARNING, ERROR, CRITICAL
+  level: "INFO"
+  
+  # Include file and line number in logs?
+  include_location: true
+  
+  # Timestamp format in logs
+  timestamp_format: "%Y-%m-%d %H:%M:%S"
+
+# Analytics configuration
+analytics:
+  # Top N products to show
+  top_n_products: 10
+  
+  # Time period for daily active users (days)
+  daily_users_lookback_days: 14
+  
+  # Conversion funnel thresholds
+  conversion:
+    min_viewers: 10
+    min_actions: 1
+
+# Email/alerting (future use)
+alerts:
+  enabled: false
+  on_quality_issues: false
+  on_pipeline_failure: false
+  recipients: []
+
+# Feature flags for experimentation
+features:
+  # Enable incremental processing?
+  incremental_processing: false
+  
+  # Enable RFM analysis?
+  enable_rfm: true
+  
+  # Enable session analysis?
+  enable_session_analysis: true
+  
+  # Enable advanced analytics?
+  enable_advanced_analytics: true
+
+# Notes for deployment teams
+notes: |
+  This configuration is environment-neutral.
+  For production, adjust:
+  - paths: point to cloud storage (S3, GCS, ADLS)
+  - spark: increase parallelism and memory
+  - quality: tighten thresholds if needed
+  - alerts: enable and configure recipients
